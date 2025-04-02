@@ -1,3 +1,5 @@
+#import "games.typ" as games
+
 #let assignment(
   title: "Paper title",
   authors: (),

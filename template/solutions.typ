@@ -1,8 +1,7 @@
 #import "@preview/cetz:0.3.4"
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge, shapes
 #import "@preview/frame-it:1.1.2": *
-#import "lib.typ": assignment
-#import "games.typ": nfgame
+#import "@local/uva-game-theory:0.1.0": games.nfgame 
 
 
 
