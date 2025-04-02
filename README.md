@@ -36,16 +36,22 @@ This will create a new directory at `$HOME/reports/{report-directory-name}`, wit
 a templated document, `main.typ`, which you can edit.
 
 ## Use within Typst webapp
-Create a new project within Typst, and upload the following files from this repository:
+Create a new project within Typst, and upload the following files from this repository 
+directly into the top of the Typst project:
 
 - `src/resources/*`: UvA logos for page headers
 - `src/lib.typ`: Defines the page setup and general style
 - `src/games.typ`: Show normal form games as a matrix
 
-For a 'ready-made' example template, also upload the following files which recreate Ulle's homework template:
+For a 'ready-made' example template, also upload the following files which recreate 
+Ulle's homework template (also at the top level of the project):
 
 - `template/main.typ`: Main entrypoint to the Typst document, akin to `main.tex`
 - `template/solutions.typ`: Contains all of the content
+
+> [!IMPORTANT]
+> The local import paths in `main.typ` and `solutions.typ` assume that you are using this template [**locally**](#local-usage). 
+> In order for the report to compile, you need to change `@local/uva-game-theory:0.1.0` --> `lib.typ`
 
 ## Contributing
 
