@@ -38,12 +38,14 @@ a templated document, `main.typ`, which you can edit.
 ## Use within Typst webapp
 Create a new project within Typst, and upload the following files from this repository:
 
-- `resources/`: UvA logos for page headers
-- `lib.typ`: Defines the page setup and general style
-- `games.typ`: Show normal form games as a matrix
-- `main.typ`: Entrypoint for report, akin to `main.tex`
+- `src/resources/*`: UvA logos for page headers
+- `src/lib.typ`: Defines the page setup and general style
+- `src/games.typ`: Show normal form games as a matrix
 
-Note that while `solutions.typ` is optional (this contains the content of the report), `main.typ` does currently import the contents of this file, so won't immediately compile if this is missing.
+For a 'ready-made' example template, also upload the following files which recreate Ulle's homework template:
+
+- `template/main.typ`: Main entrypoint to the Typst document, akin to `main.tex`
+- `template/solutions.typ`: Contains all of the content
 
 ## Contributing
 
