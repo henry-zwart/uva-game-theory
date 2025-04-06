@@ -106,26 +106,55 @@
     [#text(weight: "semibold", [Collaboration]) #{emph(collaboration)}]
   }
 
-  {
-    show heading.where(level: 1): it => {
-      set text(size: 14pt)
-      it
-    }
-    show heading: it => {
-      set text(weight: "semibold")
-      it
-      v(0.3em)
-    }
-    set heading(numbering: (..it) => {
-      if it.pos().len() == 1 {
-        [Exercise #it.pos().last()]
-      } else {
-        [Part #numbering("(a.1)", ..it.pos().slice(1, it.pos().len()))]
-      }
-    })
-
-    body
-  }
+  body
 
   bibliography
+}
+
+// exercise & part headings
+#let ex_counter = counter("exercise")
+#let part_counter = counter("part")
+#let exercise(points: none) = {
+  // Update exercise counter, reset part counter
+  ex_counter.step()
+  part_counter.update(0)
+  // Add spacing around heading
+  v(1em)
+  //Create heading text
+  block(
+    {
+      // Style text
+      set text(size:16pt, weight:"bold")
+      set par(first-line-indent: 0em)
+      "Exercise " + context ex_counter.display()
+      if points != none {
+        text(weight: "regular", style: "oblique")[ (#points points)] 
+      }
+    }
+  )
+}
+
+#let part(points: none) = {
+  // Update Counters
+  part_counter.step()
+  // Add spacing around heading
+  v(1em)
+  //Create heading text
+  block(
+    {
+      // Style text
+      set text(size:14pt, weight:"bold")
+      set par(first-line-indent: 0em)
+      "Part " + context part_counter.display("(a)")
+      if points != none {
+        text(weight: "regular", style: "oblique")[ (#points points)] 
+      }
+    }
+  )
+}
+
+// Display solution in a frame with background colour
+#let solution(it) = {
+  set block(fill: luma(235), inset: 8pt, radius: 4pt)
+  block(it)
 }
