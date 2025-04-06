@@ -50,7 +50,7 @@
   )
 
   // Body text
-  set par(first-line-indent: 1em, justify: true, spacing: 0.7em)
+  set par(first-line-indent: 1.5em, justify: true, spacing: 0.75em)
   set text(font: font, size: fontsize)
   set quote(block: true)
   show quote: set block(above: 1.5em, below: 1.5em)
@@ -134,6 +134,7 @@
       }
     }
   )
+  v(0.5em)
 }
 
 #let part(points: none) = {
