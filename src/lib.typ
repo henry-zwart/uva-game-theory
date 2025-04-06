@@ -50,8 +50,10 @@
   )
 
   // Body text
-  set par(first-line-indent: 2em, justify: true)
+  set par(first-line-indent: 1em, justify: true, spacing: 0.7em)
   set text(font: font, size: fontsize)
+  set quote(block: true)
+  show quote: set block(above: 1.5em, below: 1.5em)
 
   // Figures
   show figure.where(kind: image): it => {
