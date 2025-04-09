@@ -1,4 +1,13 @@
 #import "games.typ" as games
+#import "@preview/frame-it:1.1.2": *
+
+// Define solution environments
+#let (theorem, lemma, corollary, proposition) = frames(
+  theorem: ("Theorem", ),
+  lemma: ("Lemma", ),
+  corollary: ("Corollary", ),
+  proposition: ("Proposition", ),
+)
 
 #let assignment(
   title: "Paper title",
@@ -60,6 +69,9 @@
     set text(size: 9pt)
     it
   }
+
+  // Theme of theorem boxes
+  show: frame-style(styles.boxy)
 
   // Numbering
   set heading(numbering: "1.A")
@@ -161,3 +173,7 @@
   set block(fill: luma(235), inset: 8pt, radius: 4pt)
   block(it)
 }
+
+// Mathematical shorthand
+#let cart(x) = $bold(#x)$
+#let vector(x) = $bold(#x)$
