@@ -1,22 +1,7 @@
 #import "@preview/cetz:0.3.4"
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge, shapes
-#import "@preview/frame-it:1.1.2": *
-#import "@local/uva-game-theory:0.1.0": games.nfgame, exercise, part, solution
-
-
-
-// Define solution environments
-#let (theorem, lemma, corollary, proposition) = frames(
-  theorem: ("Theorem", ),
-  lemma: ("Lemma", ),
-  corollary: ("Corollary", ),
-  proposition: ("Proposition", ),
-)
-#show: frame-style(styles.boxy)
-
-// Mathematical shorthand
-#let cart(x) = $bold(#x)$
-#let vector(x) = $bold(#x)$
+#import "@local/uva-game-theory:0.1.0": games.nfgame
+#import "@local/uva-game-theory:0.1.0": *
 
 // Main content
 #exercise()
