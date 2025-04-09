@@ -177,3 +177,8 @@
 // Mathematical shorthand
 #let cart(x) = $bold(#x)$
 #let vector(x) = $bold(#x)$
+#let normal-form = $angle.l N, cart(A), vector(u) angle.r$
+#let qed = {
+  h(1fr)
+  $qed$
+}
