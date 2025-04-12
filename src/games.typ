@@ -3,80 +3,72 @@
 #let darkred = rgb(63%, 0, 0)
 #let darkcyan = rgb(0, 55%, 55%)
 
-#let nfgame(r1, r2, c1, c2, payoff) = {
+#let nfg-matrix(actions: (("T", "B"), ("L", "R")), payoff) = {
   cetz.canvas({
     import cetz.draw: *
 
     scale(x: 60%, y: 60%)
-    
+
     let rowcolor = darkred
     let columncolor = darkcyan
 
-    // let topleft = (-2, 2)
-    // let topright = (2, 2)
-    // let botleft = (-2, -2)
-    // let botright = (2, -2)    
+    let n_row_actions = actions.at(0).len()
+    let n_col_actions = actions.at(1).len()
+    let height = n_row_actions * 2
+    let width = n_col_actions * 2
+    set-style(stroke: black + 1.1pt)
     
-    // Row/column labels
-    set-style(stroke: rowcolor)
-    content(
-      (-2,1),
-      anchor: "east",
-      padding: .2,
-      text(fill: rowcolor, r1)
-    )
-    content(
-      (-2,-1), 
-      anchor: "east",
-      padding: .2,
-      text(fill: rowcolor, r2)
-    )
-    content(
-      (-1, 2),
-      anchor: "south",
-      padding: .2,
-      text(fill: columncolor, c1)
-    )
-    content(
-      (1, 2),
-      anchor: "south",
-      padding: .2,
-      text(fill: columncolor, c2)
-    )
+    // Draw border
+    line((0,0), (width, 0), (width, height), (0, height), (0,0))
+
+    // Draw vertical/horizontal cell boundaries
+    for x in range(1, n_col_actions) {
+      line((x*2, 0), (x*2, height))
+    }
+    for y in range(1, n_row_actions) {
+      line((0, y*2), (width, y*2))
+    }
+
+    // Draw diagonals
+    set-style(stroke: black + 0.5pt)
+    for x in range(0, n_col_actions) {
+      for y in range(0, n_row_actions) {
+        let start = (x*2, height - y*2)
+        let end = ((x+1)*2, height - (y+1)*2)
+        line(start, end)
+      }
+    }
+
+    // Row labels
+    for (i, action) in actions.at(0).enumerate() {
+      let location = (0, height - 2*i - 1)
+      content(
+        location, anchor: "east", padding: .2, text(fill: rowcolor, action)  
+      )
+    } 
+
+    // Column labels
+    for (j, action) in actions.at(1).enumerate() {
+      let location = (2*j + 1, height)
+      content(
+        location, anchor: "south", padding: .2, text(fill: columncolor, action)  
+      )
+    } 
 
     // Payoff
-    set-style(fill: rowcolor)
-    for (i,y) in (0.6, -1.4).enumerate() {
-      for (j,x) in (-1.4, 0.6).enumerate() {
-        let idx = i * 2 + j
-        content((x,y), text(fill: rowcolor, [#payoff.at(idx)]))
+    for (i, row_payoffs) in payoff.enumerate() {
+      for (j, cell_payoffs) in row_payoffs.enumerate() {
+        let anchor = (j * 2, height - (i+1)*2) // Anchor at bottom left of cell
+
+        // Row player (0.3, 0.3) offset
+        let row_payoff_loc = (anchor.at(0) + 0.3 * 2, anchor.at(1) + 0.3 * 2)
+        content(row_payoff_loc, text(fill: rowcolor, [#cell_payoffs.at(0)]))
+
+        // Column player (0.7, 0.7) offset
+        let col_payoff_loc = (anchor.at(0) + 0.7 * 2, anchor.at(1) + 0.7 * 2)
+        content(col_payoff_loc, text(fill: columncolor, [#cell_payoffs.at(1)]))
       }
     }
-    
-    // set-style(fill: columncolor)
-    for (i,y) in (1.4, -0.6).enumerate() {
-      for (j,x) in (-0.6, 1.4).enumerate() {
-        let idx = 4+ i * 2 + j
-        content((x,y), text(fill: columncolor, [#payoff.at(idx)]))
-      }
-    }
-
-    // Border
-    // bottom -> center horiz -> top -> left -> center vert -> right
-    set-style(stroke: black + 1.1pt)
-    line((-2,-2), (2,-2))
-    line((-2,0), (2,0))
-    line((-2, 2), (2,2))
-    line((-2, -2), (-2, 2))
-    line((0, -2), (0,2))
-    line((2, -2), (2,2))
-
-    // Diagonals
-    // top-left -> bottom-right -> bottom-left -> top-right
-    set-style(stroke: black + 0.5pt)
-    line((-2, 2), (0,0))
-    line((0,0), (2,-2))
-    line((-2,0), (0,-2))
-    line((0,2), (2,0))
   })
 }
+
