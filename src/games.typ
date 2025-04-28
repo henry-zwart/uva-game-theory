@@ -3,14 +3,19 @@
 #let darkred = rgb(63%, 0, 0)
 #let darkcyan = rgb(0, 55%, 55%)
 
-#let nfg-matrix(actions: (("T", "B"), ("L", "R")), payoff) = {
+#let nfg-matrix(actions: (("T", "B"), ("L", "R")), payoff, swap-colors: false) = {
+  set block(fill: none, inset: 0em)
   cetz.canvas({
+
     import cetz.draw: *
 
     scale(x: 60%, y: 60%)
 
     let rowcolor = darkred
     let columncolor = darkcyan
+    if swap-colors {
+      (rowcolor, columncolor) = (columncolor, rowcolor)
+    }
 
     let n_row_actions = actions.at(0).len()
     let n_col_actions = actions.at(1).len()
