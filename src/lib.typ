@@ -21,6 +21,7 @@
   bibliography: none,
   bib_style: "american-psychological-association",
   bib_fontsize: 9pt,
+  margin_size: 3cm,
   body,
 ) = {
   set document(author: authors.map(elem => elem.name), title: title)
@@ -31,7 +32,7 @@
   set page(
     paper: paper-size,
     numbering: "1",
-    margin: (x: 3cm, y: 3cm),
+    margin: (x: margin_size, y: margin_size),
     header: context {
       if counter(page).get().first() > 1 {
         let header_img = box(image(school_logo, width: 60%))
@@ -59,7 +60,7 @@
   )
 
   // Body text
-  set par(first-line-indent: 1.5em, justify: true, spacing: 0.75em)
+  set par(justify: true, spacing: 1.5em)
   set text(font: font, size: fontsize)
   set quote(block: true)
   show quote: set block(above: 1.5em, below: 1.5em)
@@ -170,7 +171,8 @@
 
 // Display solution in a frame with background colour
 #let solution(it) = {
-  set block(fill: luma(235), inset: 8pt, radius: 4pt)
+  set block(fill: luma(240), inset: 8pt, radius: 4pt)
+  show figure: set block(inset: 2pt, spacing: 1em)
   block(it)
 }
 
